@@ -19,7 +19,7 @@ export const NewProduct = () => {
   const { status, errorMessage,  } = useSelector( state => state.auth );
   const { messageSaved} = useSelector( state => state.journal );
   //const tipo=messageSaved;
-  //console.log(tipo);
+  console.log('hola');
 
   const dispatch = useDispatch();
   const { title, talla,body,precio,tipo,imageUrls, onInputChange } = useForm({
