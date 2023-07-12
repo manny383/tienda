@@ -4,7 +4,7 @@ export const journalSlice = createSlice({
     name: 'journal',
     initialState: {
         isSaving: false,
-        messageSaved: '',
+        messageSaved: `/assets/descarga.jpg`,
         notes: [],
         active: null,
         // active: {

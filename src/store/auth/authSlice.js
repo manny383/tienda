@@ -7,7 +7,7 @@ export const authSlice = createSlice({
         uid: null,
         email: null,
         displayName: null,
-        photoURL: null,
+        photoURL: `/assets/descarga.jpg`,
         errorMessage: null,
     },
     reducers: {
@@ -16,7 +16,7 @@ export const authSlice = createSlice({
             state.uid = payload.uid;
             state.email = payload.email;
             state.displayName = payload.displayName;
-            state.photoURL = payload.photoURL;
+            state.photoURL = `/assets/descarga.jpg`;
             state.errorMessage = null;
         },
         logout: ( state, { payload } ) => {

@@ -16,7 +16,7 @@ import { AuthLayout } from '../../auth/layout/AuthLayout';
 export const NewProduct = () => {
   const WebcamComponent = () => <Webcam />;
 
-  const { status, errorMessage,  } = useSelector( state => state.auth );
+  const { status, errorMessage,photoURL,  } = useSelector( state => state.auth );
   const { messageSaved} = useSelector( state => state.journal );
   //const tipo=messageSaved;
   console.log('hola');
@@ -31,9 +31,19 @@ export const NewProduct = () => {
     
     imageUrls: 'a',
   });
+  //intentoimgen
+  const addimagen = () => {
+    console.log("Calculating...");
+    //for (let i = 0; i < 1000000000; i++) {
+    //  num += 1;
+    //}
+    return messageSaved;
+  };
   
   const isAuthenticating = useMemo( () => status === 'checking', [status]);
-  
+  //cargar imagen
+
+  const calculation = useMemo(() => addimagen(messageSaved), [messageSaved]);
 
   const onSubmit = ( event ) => {
     event.preventDefault();
@@ -51,7 +61,9 @@ export const NewProduct = () => {
   //archivos
   const fileInputRef = useRef();
   
-   const heroImageUrl = `/assets/descarga.jpg`;
+   const heroImageUrl = photoURL;
+
+   
 
  const onFileInputChange = ({ target }) => {
         if( target.files === 0 ) return;
@@ -143,19 +155,13 @@ export const NewProduct = () => {
                    <UploadOutlined />
                 </IconButton>
                 
-                <IconButton
-                    color="primary"
-                    
-                    onClick={ () => fileInputRef.current.click() }
-                >
-                   <CameraEnhance />
-                </IconButton>
+               
                
               
             </Grid>
             <Grid>
               <div className="col-4" >
-                        <img src={ heroImageUrl } className="card-img"  />
+                        <img src={ calculation } className="card-img"  />
                     </div>
             </Grid>
 
