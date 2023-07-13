@@ -46,7 +46,7 @@ export const PantalonesPage = () => {
 
       <hr />
 
-     <ProductoList tipos='p' />
+     <ProductoList tipos='pantalon' />
 
     </>
   )

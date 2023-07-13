@@ -8,7 +8,7 @@ import { fileUpload, loadNotes } from '../../productos/helpers';
 
 export const startNewNote = (title='nada',tallas='nada',body='nada',precio='nada',tipo='p',iu='nada') => {
     return async( dispatch, getState ) => {
-        console.log('entra start')
+        
 
         dispatch( savingNewNote() );
         console.log('entra start pasa saving')

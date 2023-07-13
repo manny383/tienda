@@ -33,7 +33,7 @@ export const CalzadoPage = () => {
       </IconButton>
       <hr />
 
-      <ProductoList tipos='c' />
+      <ProductoList tipos='calzado' />
     </>
   )
 }

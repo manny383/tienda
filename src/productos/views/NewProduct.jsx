@@ -1,10 +1,10 @@
-import { useMemo, useRef } from 'react';
-import {Webcam} from "react-webcam";
+import { useMemo, useRef,useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import { CameraEnhance, DeleteOutline, SaveOutlined, UploadOutlined } from '@mui/icons-material';
-import { Alert, Button, Grid,IconButton, Link, TextField, Typography } from '@mui/material';
-
+import {  UploadOutlined } from '@mui/icons-material';
+import { Alert, Button, Grid,IconButton, Link, TextField } from '@mui/material';
+import Combobox from "react-widgets/Combobox";
 import { setActiveNote, startDeletingNote, startNewNote, startSaveNote, startUploadingFiles } from '../../store/tienda';
 
 
@@ -13,13 +13,14 @@ import { useForm } from '../../hooks';
 import { AuthLayout } from '../../auth/layout/AuthLayout';
 
 
+
 export const NewProduct = () => {
-  const WebcamComponent = () => <Webcam />;
+  
 
   const { status, errorMessage,photoURL,  } = useSelector( state => state.auth );
   const { messageSaved} = useSelector( state => state.journal );
   //const tipo=messageSaved;
-  console.log('hola');
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const { title, talla,body,precio,tipo,imageUrls, onInputChange } = useForm({
@@ -27,16 +28,14 @@ export const NewProduct = () => {
     talla: '',
     body: '',
     precio:'',
-    tipo:'',
+    tipo:'blusa',
     
     imageUrls: 'a',
   });
   //intentoimgen
+  const [valor, setValue] = useState('blusa')
   const addimagen = () => {
-    console.log("Calculating...");
-    //for (let i = 0; i < 1000000000; i++) {
-    //  num += 1;
-    //}
+    
     return messageSaved;
   };
   
@@ -46,22 +45,16 @@ export const NewProduct = () => {
   const calculation = useMemo(() => addimagen(messageSaved), [messageSaved]);
 
   const onSubmit = ( event ) => {
+    
     event.preventDefault();
-    //console.log(messageSaved);
-    //console.log('prueba uno');
-    //imageUrls=messageSaved;
-        //console.log('prueba')
-        //fileInputRef2.current.click();
-        //console.log(imageUrls);
-
-     //console.log('onsumit')
-     //console.log({ title , talla,body,precio,tipo,messageSaved });
-    dispatch( startNewNote( title, talla,body,precio,tipo,messageSaved ) );
+    console.log(title, talla,body,precio,valor,messageSaved );
+    dispatch( startNewNote( title, talla,body,precio,valor,messageSaved ) );
+    navigate("/blusas");
+    
   }
   //archivos
   const fileInputRef = useRef();
   
-   const heroImageUrl = photoURL;
 
    
 
@@ -101,21 +94,22 @@ export const NewProduct = () => {
               />
             </Grid>
             <Grid item xs={ 12 } sx={{ mt: 2 }}>
-              <TextField 
-                label="tipo" 
-                type="tipo" 
-                placeholder='tipo' 
-                fullWidth
+              <Combobox
+                
+                defaultValue= {valor}
+                
+                data={["blusa", "calzado", "pantalon"]}
                 name="tipo"
-                value={ tipo }
-                onChange={ onInputChange }
+                value={valor}
+                onChange={valor => setValue(valor)}
+                
               />
             </Grid>
 
             <Grid item xs={ 12 } sx={{ mt: 2 }}>
               <TextField 
                 label="Precio" 
-                type="text" 
+                type="number" 
                 placeholder='$$' 
                 fullWidth
                 name="precio"
