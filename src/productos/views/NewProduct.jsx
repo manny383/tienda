@@ -49,7 +49,15 @@ export const NewProduct = () => {
     event.preventDefault();
     console.log(title, talla,body,precio,valor,messageSaved );
     dispatch( startNewNote( title, talla,body,precio,valor,messageSaved ) );
-    navigate("/blusas");
+    if(valor=='blusa'){
+      navigate("/blusas");
+    }
+    if(valor=='calzado'){
+      navigate("/calzado");
+    }
+    if(valor=='pantalon'){
+      navigate("/pantalones");
+    }
     
   }
   //archivos
